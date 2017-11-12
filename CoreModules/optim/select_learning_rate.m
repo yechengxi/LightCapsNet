@@ -43,7 +43,7 @@ function [lr_best,min_loss] = select_learning_rate(net,opts )
                 res(1).x=opts.train(idx_nd{:});
                 
                 %classification
-                if strcmp(net.layers{end}.type,'softmaxloss')
+                if (strcmp(net.layers{end}.type,'softmaxloss')||strcmp(net.layers{end}.type,'marginloss'))
                     res(1).class=opts.train_labels(idx);
                 end
 

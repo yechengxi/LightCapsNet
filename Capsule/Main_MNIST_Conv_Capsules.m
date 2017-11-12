@@ -2,7 +2,7 @@ clear all;
 addpath(genpath('../CoreModules'));
 n_epoch=20; %training epochs
 dataset_name='mnist'; %dataset name
-network_name='mlp'; %network name
+network_name='caps_cnn'; %network name
 use_gpu=(gpuDeviceCount>0) %use gpu or not 
 if use_gpu
     %Requires Neural Network Toolbox to use it.
@@ -14,7 +14,7 @@ PrepareDataFunc=@PrepareData_MNIST_CNN;
 NetInit=@net_init_mnist_conv_capsules;
 
 %automatically select learning rates
-use_selective_sgd=0; 
+use_selective_sgd=1; 
 %select a new learning rate every n epochs
 ssgd_search_freq=10; 
 learning_method=@adam; %training method: @sgd,@rmsprop,@adagrad,@adam
