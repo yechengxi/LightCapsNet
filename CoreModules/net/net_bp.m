@@ -120,7 +120,7 @@ function [ net,res,opts ] = net_bp( net,res,opts )
                 [res(layer).dzdx ,res(layer).dzdw,res(layer).dzdb,~] = linear_capsule(res(layer).x,net.layers{layer}.weights{1},net.layers{layer}.weights{2},net.layers{layer}.d, res(layer+1).dzdx,opts);
             case 'dynamic_routing_linear_capsule'
                 res(layer).dzdb=[];
-                [res(layer).dzdx ,res(layer).dzdw,net.layers{layer}.B,opts] = dynamic_routing_linear_capsule(res(layer).x,net.layers{layer}.weights{1},net.layers{layer}.B,net.layers{layer}.d1,net.layers{layer}.d2,res(layer+1).dzdx,opts);
+                [res(layer).dzdx ,res(layer).dzdw,opts] = dynamic_routing_linear_capsule(res(layer).x,net.layers{layer}.weights{1},net.layers{layer}.d1,net.layers{layer}.d2,res(layer+1).dzdx,opts);
             case 'squash'
                 [res(layer).dzdx ] = squash(res(layer).x,net.layers{layer}.d, res(layer+1).dzdx);
                 

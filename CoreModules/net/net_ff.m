@@ -138,7 +138,7 @@ function [ net,res,opts ] = net_ff( net,res,opts )
                 [res(layer+1).x,~,~,opts] = linear_capsule(res(layer).x,net.layers{layer}.weights{1},net.layers{layer}.weights{2},net.layers{layer}.d,[],opts);
             
             case 'dynamic_routing_linear_capsule'
-                [res(layer+1).x,~,~,opts] = dynamic_routing_linear_capsule(res(layer).x,net.layers{layer}.weights{1},net.layers{layer}.B,net.layers{layer}.d1,net.layers{layer}.d2,[],opts);
+                [res(layer+1).x,~,opts] = dynamic_routing_linear_capsule(res(layer).x,net.layers{layer}.weights{1},net.layers{layer}.d1,net.layers{layer}.d2,[],opts);
             case 'squash'
                 [res(layer+1).x] = squash(res(layer).x,net.layers{layer}.d,[]);
                 
