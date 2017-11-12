@@ -1,8 +1,18 @@
 function [  net,res,opts ] = adagrad(  net,res,opts )
 %   Modified Adagrad using second-order information:
 %   1. Duchi, J., Hazan, E., & Singer, Y. (2011). 
+%   Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12(Jul), 2121-2159.
+%   2. Ye, C., Yang, Y., Fermuller, C., & Aloimonos, Y. (2017). 
+%   On the Importance of Consistency in Training Deep Neural Networks. arXiv preprint arXiv:1708.00631.
+%
 
-
+    if ~isfield(opts.parameters,'second_order')
+        opts.parameters.second_order=0;
+    end
+    if opts.parameters.second_order
+        [  net,res,opts ] = gradient_decorrelation(  net,res,opts );
+    end
+    
     if ~isfield(opts.parameters,'weightDecay')
         opts.parameters.weightDecay=1e-4;
     end

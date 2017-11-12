@@ -2,6 +2,12 @@ function [  net,res,opts ] = sgd(  net,res,opts )
 %Stochastic gradient descent algorithm
 
 
+    if ~isfield(opts.parameters,'second_order')
+        opts.parameters.second_order=0;
+    end
+    if opts.parameters.second_order
+        [  net,res,opts ] = gradient_decorrelation(  net,res,opts );
+    end
     
     if ~isfield(opts.parameters,'weightDecay')
         opts.parameters.weightDecay=1e-4;

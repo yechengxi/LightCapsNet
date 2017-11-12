@@ -2,7 +2,15 @@ function [  net,res,opts ] = adam(  net,res,opts )
 % Modified Adam using second-order information.
 %   1. Kingma, D., & Ba, J. (2014). 
 %   Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980.
+%   2. Ye, C., Yang, Y., Fermuller, C., & Aloimonos, Y. (2017). 
+%   On the Importance of Consistency in Training Deep Neural Networks. arXiv preprint arXiv:1708.00631.
 
+    if ~isfield(opts.parameters,'second_order')
+        opts.parameters.second_order=0;
+    end
+    if opts.parameters.second_order
+        [  net,res,opts ] = gradient_decorrelation(  net,res,opts );
+    end
     
     if ~isfield(opts.parameters,'weightDecay')
         opts.parameters.weightDecay=0;

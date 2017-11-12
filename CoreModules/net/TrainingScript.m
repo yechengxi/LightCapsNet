@@ -53,7 +53,7 @@ for ep=start_ep:opts.n_epoch
     
     if opts.plot
         %figure(figure1);
-        if strcmp(net.layers{end}.type,'softmaxloss')
+        if (strcmp(net.layers{end}.type,'softmaxloss')||strcmp(net.layers{end}.type,'marginloss'))
             subplot(1,2,1); 
             plot(opts.results.TrainEpochError,'b','DisplayName','Train (top1)');hold on;
             plot(opts.results.TrainEpochError_Top5,'b--','DisplayName','Train (top5)');hold on;
@@ -88,7 +88,7 @@ end
 opts.train=[];
 opts.test=[];
 
-if strcmp(net.layers{end}.type,'softmaxloss')
+if (strcmp(net.layers{end}.type,'softmaxloss')||strcmp(net.layers{end}.type,'marginloss'))
     if isfield(opts,'valid')&&(numel(opts.valid)>0)
         [min_err_valid,best_id]=min(opts.results.ValidEpochError);
          min_err=opts.results.TestEpochError(best_id);  

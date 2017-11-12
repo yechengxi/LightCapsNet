@@ -65,7 +65,7 @@ function [net,opts]=train_net(net,opts)
             if strcmp(net.layers{end}.type,'softmaxloss')
                 err=error_multiclass(res(1).class,res);
             else
-                err=error_multiclass(res(1).class,res,size(res(end-1).x,1)./opts.n_class);
+                err=error_multiclass(res(1).class,res,size(squeeze(res(end-1).x),1)./opts.n_class);
             end
             opts.TrainMiniBatchError=[opts.TrainMiniBatchError;err(1)/opts.parameters.batch_size];
             opts.TrainMiniBatchError_Top5=[opts.TrainMiniBatchError_Top5;err(2)/opts.parameters.batch_size];

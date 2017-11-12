@@ -2,6 +2,15 @@ function [  net,res,opts ] = rmsprop(  net,res,opts )
 % Modified RMSProp using second-order information.   
 %   1.Tieleman, T. and Hinton, G. Lecture 6.5 - RMSProp, COURSERA: Neural Networks for Machine Learning.
 %   Technical report, 2012.
+%   2.Ye, C., Yang, Y., Fermuller, C., & Aloimonos, Y. (2017). 
+%   On the Importance of Consistency in Training Deep Neural Networks. arXiv preprint arXiv:1708.00631.
+
+    if ~isfield(opts.parameters,'second_order')
+        opts.parameters.second_order=0;
+    end
+    if opts.parameters.second_order
+        [  net,res,opts ] = gradient_decorrelation(  net,res,opts );
+    end
 
     if ~isfield(opts.parameters,'weightDecay')
         opts.parameters.weightDecay=1e-4;

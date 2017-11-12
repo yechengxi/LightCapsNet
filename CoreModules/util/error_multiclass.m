@@ -5,7 +5,7 @@ if exist('d','var')&&~isempty(d)
     %n_class=size(res(end-1).x,1)/d;
     x=reshape(res(end-1).x,d,[]);
     x=sum(x.^2,1).^0.5;
-    x=reshape(x,[],size(res(end-1).x,2));
+    x=reshape(x,[],numel(labels));
     predictions = gather(x);
     
 else

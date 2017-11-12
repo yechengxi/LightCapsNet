@@ -61,7 +61,7 @@ function [opts]=test_net(net,opts)
             if strcmp(net.layers{end}.type,'softmaxloss')
                 err=error_multiclass(res(1).class,res);
             else
-                err=error_multiclass(res(1).class,res,size(res(end-1).x,1)./opts.n_class);
+                err=error_multiclass(res(1).class,res,size(squeeze(res(end-1).x),1)./opts.n_class);
             end
             opts.TestMiniBatchError=[opts.TestMiniBatchError;err(1)/opts.parameters.batch_size];
             opts.TestMiniBatchError_Top5=[opts.TestMiniBatchError_Top5;err(2)/opts.parameters.batch_size];
